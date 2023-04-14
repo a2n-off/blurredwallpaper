@@ -6,6 +6,10 @@
   <kcfgfile name=""/>
 
   <group name="General">
+    <entry name="ActiveBlur" type="bool">
+      <label>Active Blur</label>
+      <default>true</default>
+    </entry>
     <entry name="BlurRadius" type="int">
       <label>Blur radius</label>
       <default>40</default>

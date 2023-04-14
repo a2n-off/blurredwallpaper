@@ -12,8 +12,6 @@ import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 // for FastBlur
 import QtGraphicalEffects 1.15
 
-import org.kde.kwindowsystem 1.0 as KWindowSystem
-
 // root component displaying the image as the wallpaper
 ImageStackView {
     id: root
@@ -37,7 +35,7 @@ ImageStackView {
     WindowModel { id: windowModel }
 
     // Add a FastBlur effect to the wallpaper
-    layer.enabled: true
+    layer.enabled: activeBlurRadioButton.checked
     layer.effect: FastBlur {
         anchors.fill: parent
         radius: windowModel.noWindowActive ? 0 : 64 // todo change that with config

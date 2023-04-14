@@ -39,6 +39,11 @@ ColumnLayout {
     property var cfg_UncheckedSlides: []
     property var cfg_UncheckedSlidesDefault: []
 
+    // custom property for the active blur effect
+    property alias cfg_ActiveBlur: activeBlurRadioButton.checked
+    property int cfg_AnimationDuration: 400
+    property int cfg_BlurRadius: 40
+
     signal configurationChanged()
 
     function saveConfig() {
@@ -83,6 +88,52 @@ ColumnLayout {
 
     onCfg_SlideshowFoldersFirstChanged: {
         imageWallpaper.slideshowFoldersFirst = cfg_SlideshowFoldersFirst
+    }
+
+    Kirigami.FormLayout {
+        twinFormLayouts: parentLayout
+
+        // on/off button for active blur
+        QtControls2.CheckBox {
+            id: activeBlurRadioButton
+            visible: true
+            Kirigami.FormData.label: "Active Blur:"
+            text: activeBlurRadioButton.checked ? "On" : "Off"
+        }
+
+        // slider for the active blur radius
+        QtControls2.SpinBox {
+            Kirigami.FormData.label: "Blur Radius:"
+            id: blurRadiusSpinBox
+            value: cfg_BlurRadius
+            onValueChanged: cfg_BlurRadius = value
+            stepSize: 1
+            from: 1
+            to: 2000000000
+            editable: true
+            enabled: activeBlurRadioButton.checked
+        }
+
+        // slider for the active blur animation delay
+        QtControls2.SpinBox {
+            Kirigami.FormData.label: "Animation Delay:"
+            id: animationDurationSpinBox
+            value: cfg_AnimationDuration
+            onValueChanged: cfg_AnimationDuration = value
+            from: 0
+            to: 2000000000
+            stepSize: 100
+            editable: true
+            enabled: activeBlurRadioButton.checked
+
+            textFromValue: function(value, locale) {
+                return i18n("%1ms", value)
+            }
+
+            valueFromText: function(text, locale) {
+                return parseInt(text, 10)
+            }
+        }
     }
 
     Kirigami.FormLayout {
