@@ -109,7 +109,7 @@ ColumnLayout {
             onValueChanged: cfg_BlurRadius = value
             stepSize: 1
             from: 1
-            to: 2000000000
+            to: 100
             editable: true
             enabled: activeBlurRadioButton.checked
         }
@@ -121,8 +121,8 @@ ColumnLayout {
             value: cfg_AnimationDuration
             onValueChanged: cfg_AnimationDuration = value
             from: 0
-            to: 2000000000
-            stepSize: 100
+            to: 60000 // 1 minute in ms
+            stepSize: 50
             editable: true
             enabled: activeBlurRadioButton.checked
 
