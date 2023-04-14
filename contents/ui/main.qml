@@ -5,22 +5,27 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 import QtQuick 2.5
 import QtQuick.Window 2.2
+// used to access the ImageBackend component, which handles the image loading and configuration
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
+// for FastBlur
+import QtGraphicalEffects 1.15
 
+// root component displaying the image as the wallpaper
 ImageStackView {
     id: root
 
     fillMode: wallpaper.configuration.FillMode
     configColor: wallpaper.configuration.Color
     blur: wallpaper.configuration.Blur
+    // path of the chosen wallpaper
     source: {
         if (wallpaper.pluginName === "org.kde.slideshow") {
             return imageWallpaper.image;
         }
         if (wallpaper.configuration.PreviewImage !== "null") {
+            console.log('>>>> path is', wallpaper.configuration.PreviewImage)
             return wallpaper.configuration.PreviewImage;
         }
         return wallpaper.configuration.Image;
@@ -28,6 +33,19 @@ ImageStackView {
     sourceSize: Qt.size(root.width * Screen.devicePixelRatio, root.height * Screen.devicePixelRatio)
     wallpaperInterface: wallpaper
 
+    // Add a FastBlur effect to the wallpaper
+    layer.enabled: true
+    layer.effect: FastBlur {
+        anchors.fill: parent
+        radius: 64
+        source: Image {
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectCrop
+            source: root.source
+        }
+    }
+
+    // next 3 function : used by the WallpaperInterface to handle drag and drop, next slide, and open action
     // Public API functions accessible from C++:
     // e.g. used by WallpaperInterface for drag and drop
     function setUrl(url) {
@@ -68,6 +86,7 @@ ImageStackView {
         }
     }
 
+    // handles the configuration and loading of the wallpaper image
     Wallpaper.ImageBackend {
         id: imageWallpaper
 
@@ -83,7 +102,7 @@ ImageStackView {
         slideshowFoldersFirst: wallpaper.configuration.SlideshowFoldersFirst
         uncheckedSlides: wallpaper.configuration.UncheckedSlides
 
-        // Invoked from C++
+        // invoked from C++ to write the new image configuration
         function writeImageConfig(newImage: string) {
             configMap.Image = newImage;
         }

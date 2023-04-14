@@ -6,6 +6,15 @@
   <kcfgfile name=""/>
 
   <group name="General">
+    <entry name="BlurRadius" type="int">
+      <label>Blur radius</label>
+      <default>40</default>
+    </entry>
+    <entry name="AnimationDuration" type="int">
+      <label>How quickly the change takes effect.</label>
+      <default>400</default>
+    </entry>
+
     <entry name="Blur" type="bool">
       <label>Blur background filling</label>
       <default>false</default>

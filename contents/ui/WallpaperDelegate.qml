@@ -122,6 +122,19 @@ KCM.GridDelegate {
                 easing.type: Easing.InOutQuad
             }
         }
+
+        // Add the blur to the thumbnail for preview purpose
+        FastBlur {
+            id: wallieBlurPreview
+            anchors.fill: parent
+            source: walliePreview
+            visible: true
+            radius: wallpaperDelegate.hovered ? 32 : 0 // todo change that with config
+
+            Behavior on radius {
+                NumberAnimation { duration: 600 } // todo change that with config
+            }
+        }
     }
 
     Behavior on opacity {

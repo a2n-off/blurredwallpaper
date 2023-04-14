@@ -85,8 +85,6 @@ ColumnLayout {
         imageWallpaper.slideshowFoldersFirst = cfg_SlideshowFoldersFirst
     }
 
-    //Rectangle { color: "orange"; x: formAlignment; width: formAlignment; height: 20 }
-
     Kirigami.FormLayout {
         twinFormLayouts: parentLayout
         QtControls2.ComboBox {
