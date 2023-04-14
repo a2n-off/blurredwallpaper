@@ -1,3 +1,5 @@
+[//]: # (note for me - Linux/Unix Desktops > Desktop Extensions > KDE Plasma Extensions > Plasma Wallpaper Plugins)
+
 # Blurred Wallpaper - plasma wallpaper plugin
 
 ![pres](assets/main-screenshot.png)
@@ -28,7 +30,7 @@ I have duplicated the default KDE `image` plugin so all the default effect and b
 
 ## Installation
 
-Place the source (`a2n.blur` folder) in `~/.local/share/plasma/wallpapers/` or dl via [the KDE store](https://www.pling.com/replaceme/)
+Place the source (`a2n.blur` folder) in `~/.local/share/plasma/wallpapers/` or dl via [the KDE store](https://www.pling.com/member/608647/)
 
 ## Configuration
 
@@ -60,8 +62,8 @@ Do not hesitate to open a pr or an issue. I reply when I can.
 
 - [Give me a tips](https://ko-fi.com/a2n00)
 - [Give a star on github](https://github.com/bouteillerAlan/blurredwallpaper)
-- [Add a rating and a comment on Pling](https://www.pling.com/p/replaceme/)
-- [Become a fan on Pling](https://www.pling.com/p/replaceme/)
+- [Add a rating and a comment on Pling](https://www.pling.com/member/608647/)
+- [Become a fan on Pling](https://www.pling.com/member/608647/)
 - Or just participate to the developement :D
 
 ### Thanks !
