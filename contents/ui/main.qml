@@ -12,6 +12,8 @@ import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 // for FastBlur
 import QtGraphicalEffects 1.15
 
+import org.kde.kwindowsystem 1.0 as KWindowSystem
+
 // root component displaying the image as the wallpaper
 ImageStackView {
     id: root
@@ -25,7 +27,6 @@ ImageStackView {
             return imageWallpaper.image;
         }
         if (wallpaper.configuration.PreviewImage !== "null") {
-            console.log('>>>> path is', wallpaper.configuration.PreviewImage)
             return wallpaper.configuration.PreviewImage;
         }
         return wallpaper.configuration.Image;
@@ -33,15 +34,21 @@ ImageStackView {
     sourceSize: Qt.size(root.width * Screen.devicePixelRatio, root.height * Screen.devicePixelRatio)
     wallpaperInterface: wallpaper
 
+    WindowModel { id: windowModel }
+
     // Add a FastBlur effect to the wallpaper
     layer.enabled: true
     layer.effect: FastBlur {
         anchors.fill: parent
-        radius: 64
+        radius: windowModel.noWindowActive ? 0 : 64 // todo change that with config
         source: Image {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
             source: root.source
+        }
+        // animate the blur apparition
+        Behavior on radius {
+            NumberAnimation { duration: 600 } // todo change that with config
         }
     }
 
