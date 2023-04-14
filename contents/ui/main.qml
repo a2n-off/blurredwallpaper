@@ -35,7 +35,7 @@ ImageStackView {
     WindowModel { id: windowModel }
 
     // Add a FastBlur effect to the wallpaper
-    layer.enabled: activeBlurRadioButton.checked
+    layer.enabled: activeBlurRadioButton.checked // todo change that with config
     layer.effect: FastBlur {
         anchors.fill: parent
         radius: windowModel.noWindowActive ? 0 : 64 // todo change that with config

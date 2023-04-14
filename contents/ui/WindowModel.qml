@@ -44,11 +44,11 @@ Item {
 		filterRole: 'IsActive'
 		filterRegExp: 'true'
 		onDataChanged: {
-			console.log('activeWindowModel.onDataChanged')
+			// console.log('activeWindowModel.onDataChanged')
 			updateActiveWindowInfo()
 		}
 		onCountChanged: {
-			console.log('activeWindowModel.onCountChanged')
+			// console.log('activeWindowModel.onCountChanged')
 			updateActiveWindowInfo()
 		}
 	}

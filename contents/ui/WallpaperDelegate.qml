@@ -128,11 +128,10 @@ KCM.GridDelegate {
             id: wallieBlurPreview
             anchors.fill: parent
             source: walliePreview
-            visible: true
-            radius: wallpaperDelegate.hovered ? 32 : 0 // todo change that with config
-
+            visible: cfg_ActiveBlur
+            radius: wallpaperDelegate.hovered ? cfg_BlurRadius : 0
             Behavior on radius {
-                NumberAnimation { duration: 600 } // todo change that with config
+                NumberAnimation { duration: cfg_AnimationDuration }
             }
         }
     }
