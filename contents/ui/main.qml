@@ -11,7 +11,6 @@ import QtQuick.Window 2.2
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 // for FastBlur
 import QtGraphicalEffects 1.15
-import QtQuick.Controls 2.5 as QtControls2
 
 // root component displaying the image as the wallpaper
 ImageStackView {
