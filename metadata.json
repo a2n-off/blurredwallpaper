@@ -20,7 +20,7 @@
             "image/webp",
             "image/tiff"
         ],
-        "Name": "a2n.blured",
+        "Name": "Active Blur",
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],
