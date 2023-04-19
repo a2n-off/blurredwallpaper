@@ -43,7 +43,7 @@ KCM.GridDelegate {
         Kirigami.Action {
             icon.name: "edit-delete"
             tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove Wallpaper")
-            visible: model.removable && !model.pendingDeletion && configDialog.currentWallpaper == "a2n.blur"
+            visible: model.removable && !model.pendingDeletion && !cfg_Slideshow
             onTriggered: {
                 model.pendingDeletion = true;
 
@@ -109,7 +109,7 @@ KCM.GridDelegate {
             }
         }
         QtControls2.CheckBox {
-            visible: configDialog.currentWallpaper == "org.kde.slideshow"
+            visible: cfg_Slideshow
             anchors.right: parent.right
             anchors.top: parent.top
             checked: visible ? model.checked : false
@@ -144,7 +144,7 @@ KCM.GridDelegate {
     }
 
     onClicked: {
-        if (configDialog.currentWallpaper == "a2n.blur") {
+        if (!cfg_Slideshow) {
             cfg_Image = model.packageName || model.path;
             wallpaper.configuration.PreviewImage = cfg_Image;
         }

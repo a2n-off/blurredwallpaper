@@ -50,7 +50,7 @@ ColumnLayout {
     signal configurationChanged()
 
     function saveConfig() {
-        if (configDialog.currentWallpaper === "a2n.blur") {
+        if (!cfg_Slideshow) {
             imageWallpaper.wallpaperModel.commitAddition();
             imageWallpaper.wallpaperModel.commitDeletion();
         }
@@ -58,7 +58,7 @@ ColumnLayout {
 
     PlasmaWallpaper.ImageBackend {
         id: imageWallpaper
-        renderingMode: (configDialog.currentWallpaper === "a2n.blur") ? PlasmaWallpaper.ImageBackend.SingleImage : PlasmaWallpaper.ImageBackend.SlideShow
+        renderingMode: (!cfg_Slideshow) ? PlasmaWallpaper.ImageBackend.SingleImage : PlasmaWallpaper.ImageBackend.SlideShow
         targetSize: {
             if (typeof Plasmoid !== "undefined") {
                 return Qt.size(Plasmoid.width * Screen.devicePixelRatio, Plasmoid.height * Screen.devicePixelRatio)
@@ -238,14 +238,14 @@ ColumnLayout {
         }
         onDropped: {
             drop.urls.forEach(function (url) {
-                if (configDialog.currentWallpaper === "a2n.blur") {
+                if (!cfg_Slideshow) {
                     imageWallpaper.addUsersWallpaper(url);
                 } else {
                     imageWallpaper.addSlidePath(url);
                 }
             });
             // Scroll to top to view added images
-            if (configDialog.currentWallpaper === "a2n.blur") {
+            if (!cfg_Slideshow) {
                 thumbnailsLoader.item.view.positionViewAtIndex(0, GridView.Beginning);
             }
         }
@@ -253,15 +253,15 @@ ColumnLayout {
         Loader {
             id: thumbnailsLoader
             anchors.fill: parent
-            source: (configDialog.currentWallpaper == "a2n.blur") ? "ThumbnailsComponent.qml" :
-                ((configDialog.currentWallpaper == "org.kde.slideshow") ? "SlideshowComponent.qml" : "")
+            source: (!cfg_Slideshow) ? "ThumbnailsComponent.qml" :
+                ((cfg_Slideshow) ? "SlideshowComponent.qml" : "")
         }
     }
 
     RowLayout {
         id: buttonsRow
         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-        visible: configDialog.currentWallpaper == "a2n.blur"
+        visible: !cfg_Slideshow
         QtControls2.Button {
             icon.name: "list-add"
             text: i18nd("plasma_wallpaper_org.kde.image","Add Image…")

@@ -19,7 +19,7 @@ Item {
 
     property alias view: wallpapersGrid.view
 
-    readonly property var imageModel: (configDialog.currentWallpaper === "a2n.blur") ? imageWallpaper.wallpaperModel : imageWallpaper.slideFilterModel
+    readonly property var imageModel: (!cfg_Slideshow) ? imageWallpaper.wallpaperModel : imageWallpaper.slideFilterModel
 
     Connections {
         target: imageWallpaper
@@ -27,7 +27,7 @@ Item {
             if (imageWallpaper.loading) {
                 return;
             }
-            if (configDialog.currentWallpaper === "a2n.blur" && imageModel.indexOf(cfg_Image) < 0) {
+            if (!cfg_Slideshow && imageModel.indexOf(cfg_Image) < 0) {
                 imageWallpaper.addUsersWallpaper(cfg_Image);
             }
             wallpapersGrid.resetCurrentIndex();
@@ -47,7 +47,7 @@ Item {
         function resetCurrentIndex() {
             //that min is needed as the module will be populated in an async way
             //and only on demand so we can't ensure it already exists
-            if (configDialog.currentWallpaper === "a2n.blur") {
+            if (!cfg_Slideshow) {
                 view.currentIndex = Qt.binding(() =>  Math.min(imageModel.indexOf(cfg_Image), imageModel.count - 1));
             }
         }
@@ -89,6 +89,6 @@ Item {
 
     KCM.SettingHighlighter {
         target: wallpapersGrid
-        highlight: configDialog.currentWallpaper === "a2n.blur" && cfg_Image != cfg_ImageDefault
+        highlight: !cfg_Slideshow && cfg_Image != cfg_ImageDefault
     }
 }
