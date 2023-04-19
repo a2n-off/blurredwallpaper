@@ -44,6 +44,9 @@ ColumnLayout {
     property int cfg_AnimationDuration: 400
     property int cfg_BlurRadius: 40
 
+    // custom property for chaingning other type of Wallpapers plugin
+    property alias cfg_Slideshow: activeSlideshowRadioButton.checked
+
     signal configurationChanged()
 
     function saveConfig() {
@@ -92,6 +95,14 @@ ColumnLayout {
 
     Kirigami.FormLayout {
         twinFormLayouts: parentLayout
+
+        // on/off button for slideshow option
+        QtControls2.CheckBox {
+            id: activeSlideshowRadioButton
+            visible: true
+            Kirigami.FormData.label: "Slideshow:"
+            text: activeSlideshowRadioButton.checked ? "Yes" : "No"
+        }
 
         // on/off button for active blur
         QtControls2.CheckBox {
