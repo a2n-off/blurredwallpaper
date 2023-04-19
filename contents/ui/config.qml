@@ -44,7 +44,7 @@ ColumnLayout {
     property int cfg_AnimationDuration: 400
     property int cfg_BlurRadius: 40
 
-    // custom property for chaingning other type of Wallpapers plugin
+    // custom property for chosing slideshow or image
     property alias cfg_Slideshow: activeSlideshowRadioButton.checked
 
     signal configurationChanged()
