@@ -21,7 +21,7 @@ ImageStackView {
     blur: wallpaper.configuration.Blur
     // path of the chosen wallpaper
     source: {
-        if (wallpaper.pluginName === "org.kde.slideshow") {
+        if (wallpaper.configuration.Slideshow) {
             return imageWallpaper.image;
         }
         if (wallpaper.configuration.PreviewImage !== "null") {
@@ -58,7 +58,7 @@ ImageStackView {
     // Public API functions accessible from C++:
     // e.g. used by WallpaperInterface for drag and drop
     function setUrl(url) {
-        if (wallpaper.pluginName === "a2n.blur") {
+        if (!wallpaper.configuration.Slideshow) {
             const result = imageWallpaper.addUsersWallpaper(url);
 
             if (result.length > 0) {
@@ -89,7 +89,7 @@ ImageStackView {
         wallpaper.configuration.PreviewImage = "null";
         wallpaper.loading = true; // delays ksplash until the wallpaper has been loaded
 
-        if (wallpaper.pluginName === "org.kde.slideshow") {
+        if (wallpaper.configuration.Slideshow) {
             wallpaper.setAction("open", i18nd("plasma_wallpaper_org.kde.image", "Open Wallpaper Image"), "document-open");
             wallpaper.setAction("next", i18nd("plasma_wallpaper_org.kde.image", "Next Wallpaper Image"), "user-desktop");
         }
@@ -103,7 +103,7 @@ ImageStackView {
         configMap: wallpaper.configuration
         usedInConfig: false
         //the oneliner of difference between image and slideshow wallpapers
-        renderingMode: (wallpaper.pluginName === "a2n.blur") ? Wallpaper.ImageBackend.SingleImage : Wallpaper.ImageBackend.SlideShow
+        renderingMode: (!wallpaper.configuration.Slideshow) ? Wallpaper.ImageBackend.SingleImage : Wallpaper.ImageBackend.SlideShow
         targetSize: root.sourceSize
         slidePaths: wallpaper.configuration.SlidePaths
         slideTimer: wallpaper.configuration.SlideInterval
