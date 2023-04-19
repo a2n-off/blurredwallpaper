@@ -6,6 +6,11 @@
   <kcfgfile name=""/>
 
   <group name="General">
+    <entry name="Slideshow" type="bool">
+      <label>Slideshow</label>
+      <default>false</default>
+    </entry>
+
     <entry name="ActiveBlur" type="bool">
       <label>Active Blur</label>
       <default>true</default>
@@ -58,6 +63,10 @@
     <entry name="SlideshowMode" type="int">
         <label>Ordering mode for the slideshow</label>
         <default>0</default>
+    </entry>
+    <entry name="SlideshowFoldersFirst" type="bool">
+        <label>Processing folders first for the slideshow</label>
+        <default>false</default>
     </entry>
   </group>
 </kcfg>
