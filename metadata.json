@@ -2,12 +2,12 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "bouteiller.alan@gmail.com",
+                "Email": "a2n.dev@pm.me",
                 "Name": "Bouteiller <a2n> Alan"
             }
         ],
         "Category": "",
-        "Description": "Wallpaper view for images with option for auto blur",
+        "Description": "Wallpaper view for images with option for auto blur and slideshow",
         "Icon": "preferences-desktop-wallpaper",
         "Id": "a2n.blur",
         "License": "GPLv3",
@@ -24,9 +24,9 @@
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],
-        "Website": "https://github.com"
+        "Website": "https://github.com/bouteillerAlan/blurredwallpaper"
     },
-    "Keywords": "",
+    "Keywords": "blur;wallpaper;slideshow",
     "MimeType": "image/avif;image/gif;image/heif;image/jpeg;image/png;image/svg+xml;image/svg+xml-compressed;image/bmp;image/webp;image/tiff;",
     "X-KDE-ParentApp": "org.kde.plasmashell",
     "X-Plasma-DropMimeTypes": [
