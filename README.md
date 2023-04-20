@@ -6,7 +6,7 @@
 
 ## video
 
-![video-prez](assets/main-vid.mp4)
+https://user-images.githubusercontent.com/30547569/233472177-a752d175-291a-4ba3-877d-dcd25a79b6e4.mp4
 
 ## Description
 
