@@ -1,10 +1,11 @@
 [//]: # (note for me - Linux/Unix Desktops > Desktop Extensions > KDE Plasma Extensions > Plasma Wallpaper Plugins)
 
-# Blurred Wallpaper - plasma wallpaper plugin
-
-![pres](assets/main-screenshot.png)
-
-## video
+<p align="center">
+  <a href="https://www.pling.com/p/2017888/">
+    <img alt="ActiveBlur" src="assets/store-img.png" width="220"/>
+  </a>
+</p>
+<h1 align="center">Active Blur <i>- a plasma wallpaper plugin</i></h1>
 
 https://user-images.githubusercontent.com/30547569/233472177-a752d175-291a-4ba3-877d-dcd25a79b6e4.mp4
 
@@ -23,6 +24,7 @@ Blur the wallpaper if a windows is active.
 - `new` the slideshow wallpaper type is available too 
 
 ### history
+
 My own code for replacing [inactiveblur](https://github.com/Zren/plasma-wallpapers/tree/master/inactiveblur) that it seems to be abandoned.
 
 I have duplicated the default KDE `image` plugin so all the default effect and behavior is still present.
@@ -42,6 +44,8 @@ I have duplicated the default KDE `image` plugin so all the default effect and b
 | Blur Radius | Give you the possibility to customize the blur radius            | The blur is stronger or weaker                               |
 | showDesktop | Give you the possibility to customize the delay of the animation | The blur appears and disappears more quickly or less quickly |
 
+![pres](assets/main-screenshot.png)
+
 ## Code of conduct, license, authors, changelog, contributing
 
 See the following file :
@@ -55,7 +59,6 @@ See the following file :
 ## Roadmap
 
 - bug : the first time a user selects slideshow the wallpapers are not displayed
-- improve : remake the gif and use external storage or lfs
 - related : make a kwin script to affect all types of wallpapers ([see that repo](https://github.com/bouteillerAlan/activeblur))
 
 ## Want to participate? Have a bug or a request feature?
