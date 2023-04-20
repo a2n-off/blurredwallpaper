@@ -96,12 +96,24 @@ ColumnLayout {
     Kirigami.FormLayout {
         twinFormLayouts: parentLayout
 
+        Kirigami.InlineMessage {
+            id: reloadMessage
+            Layout.fillWidth: true
+            text: "If your wallpaper is not displayed, click on 'apply' then 'ok' then reopen the configuration. This bug is in the process of being fixed."
+            onLinkActivated: Qt.openUrlExternally(link)
+            type: Kirigami.MessageType.Warning
+            visible: false
+        }
+
         // on/off button for slideshow option
         QtControls2.CheckBox {
             id: activeSlideshowRadioButton
             visible: true
             Kirigami.FormData.label: "Slideshow:"
             text: activeSlideshowRadioButton.checked ? "Yes" : "No"
+            onCheckedChanged: {
+                reloadMessage.visible = activeSlideshowRadioButton.checked
+            }
         }
 
         // on/off button for active blur
