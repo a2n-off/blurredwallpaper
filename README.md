@@ -4,11 +4,9 @@
 
 ![pres](assets/main-screenshot.png)
 
-## GIF
+## video
 
-*sorry for the low rez but the gif is pretty huge*
-
-![gif-pres](assets/main-vid.gif)
+![video-prez](assets/main-vid.mp4)
 
 ## Description
 
