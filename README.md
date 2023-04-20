@@ -22,6 +22,7 @@ Blur the wallpaper if a windows is active.
     - add color and blur option in function of the positioning
 - give you the ability to deactivate the effect
 - give you the ability to change the blur radius and the animation delay
+- `new` the slideshow wallpaper type is available too 
 
 ### history
 My own code for replacing [inactiveblur](https://github.com/Zren/plasma-wallpapers/tree/master/inactiveblur) that it seems to be abandoned.
@@ -36,10 +37,11 @@ I have duplicated the default KDE `image` plugin so all the default effect and b
 
 ## Configuration
 
-| Name | Description | Result |
-|--|--|--|
-| Active Blur | If you want the effect or not | The effect is active or not |
-| Blur Radius | Give you the possibility to customize the blur radius | The blur is stronger or weaker |
+| Name        | Description                                                      | Result                                                       |
+|-------------|------------------------------------------------------------------|--------------------------------------------------------------|
+| Active Blur | If you want the effect or not                                    | The effect is active or not                                  |
+| Slideshow   | If you want your wallpaper to be in slideshow             | Your wallpaper is a slideshow or a single image         |
+| Blur Radius | Give you the possibility to customize the blur radius            | The blur is stronger or weaker                               |
 | showDesktop | Give you the possibility to customize the delay of the animation | The blur appears and disappears more quickly or less quickly |
 
 ## Code of conduct, license, authors, changelog, contributing
@@ -54,7 +56,9 @@ See the following file :
 
 ## Roadmap
 
-- give option to split the effect on double screen (actually the blur appear on all screen whenever the window is)
+- bug : the first time a user selects slideshow the wallpapers are not displayed
+- improve : remake the gif and use external storage or lfs
+- related : make a kwin script to affect all types of wallpapers ([see that repo](https://github.com/bouteillerAlan/activeblur))
 
 ## Want to participate? Have a bug or a request feature?
 
