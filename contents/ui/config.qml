@@ -132,10 +132,18 @@ ColumnLayout {
             onValueChanged: cfg_BlurRadius = value
             stepSize: 1
             from: 1
-            to: 100
+            to: 9999
             editable: true
             enabled: activeBlurRadioButton.checked
         }
+
+	Kirigami.InlineMessage {
+	    id: blurRadiusWarning
+	    Layout.fillWidth: true
+	    text: "The value ranges from 0 to 9999. Visual quality of the blur is reduced when radius exceeds value 64 due to QT. Some hight value may blackout your wallpaper. If this is the case, reduce the value untill normal behavior is restored."
+	    type: Kirigami.MessageType.Information
+	    visible: blurRadiusSpinBox.value > 64
+	}
 
         // slider for the active blur animation delay
         QtControls2.SpinBox {
