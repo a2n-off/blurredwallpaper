@@ -31,9 +31,11 @@ I have duplicated the default KDE `image` plugin so all the default effect and b
 
 ## Installation
 
-- Download the last release and extract it and place the folder into `~/.local/share/plasma/wallpapers/` next you need to rename it into `a2n.blur`
 - Download via [the KDE store](https://www.pling.com/p/2017888/)
 - Install it via the wallpaper plugin ("get new plugin" button into Desktop Folder Settings)
+- Download via [the AUR (for arch linux users)](https://aur.archlinux.org/packages/kdeplasma-blurredwallpaper-git)
+- Download the last release and extract it and place the folder into `~/.local/share/plasma/wallpapers/` next you need to rename it into `a2n.blur`
+
 
 ## Configuration
 
