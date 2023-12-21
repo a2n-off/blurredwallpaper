@@ -5,19 +5,18 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Controls.Private 1.0
-import QtQuick.Controls 2.3 as QtControls2
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Controls as QtControls2
+import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-
-import org.kde.kquickcontrolsaddons 2.0
-import org.kde.kirigami 2.4 as Kirigami
-import org.kde.kcm 1.1 as KCM
+import org.kde.kirigami as Kirigami
+import org.kde.kquickcontrolsaddons
+import org.kde.kcmutils as KCM
 
 KCM.GridDelegate {
     id: wallpaperDelegate
+
+    property var isSlideShow: cfg_Slideshow
 
     property alias color: backgroundRect.color
     opacity: model.pendingDeletion ? 0.5 : 1
@@ -43,7 +42,7 @@ KCM.GridDelegate {
         Kirigami.Action {
             icon.name: "edit-delete"
             tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove Wallpaper")
-            visible: model.removable && !model.pendingDeletion && !cfg_Slideshow
+            visible: model.removable && !model.pendingDeletion && !isSlideShow
             onTriggered: {
                 model.pendingDeletion = true;
 
@@ -63,7 +62,7 @@ KCM.GridDelegate {
 
         Kirigami.Icon {
             anchors.centerIn: parent
-            width: PlasmaCore.Units.iconSizes.large
+            width: Kirigami.Units.iconSizes.large
             height: width
             source: "view-preview"
             visible: !walliePreview.visible
@@ -92,37 +91,24 @@ KCM.GridDelegate {
             smooth: true
             pixmap: model.screenshot
             fillMode: {
-                if (cfg_FillMode == Image.Stretch) {
+                if (cfg_FillMode === Image.Stretch) {
                     return QPixmapItem.Stretch;
-                } else if (cfg_FillMode == Image.PreserveAspectFit) {
+                } else if (cfg_FillMode === Image.PreserveAspectFit) {
                     return QPixmapItem.PreserveAspectFit;
-                } else if (cfg_FillMode == Image.PreserveAspectCrop) {
+                } else if (cfg_FillMode === Image.PreserveAspectCrop) {
                     return QPixmapItem.PreserveAspectCrop;
-                } else if (cfg_FillMode == Image.Tile) {
+                } else if (cfg_FillMode === Image.Tile) {
                     return QPixmapItem.Tile;
-                } else if (cfg_FillMode == Image.TileVertically) {
+                } else if (cfg_FillMode === Image.TileVertically) {
                     return QPixmapItem.TileVertically;
-                } else if (cfg_FillMode == Image.TileHorizontally) {
+                } else if (cfg_FillMode === Image.TileHorizontally) {
                     return QPixmapItem.TileHorizontally;
                 }
                 return QPixmapItem.PreserveAspectFit;
             }
         }
-
-        // Add the blur to the thumbnail for preview purpose
-        FastBlur {
-            id: wallieBlurPreview
-            anchors.fill: parent
-            source: walliePreview
-            visible: cfg_ActiveBlur
-            radius: wallpaperDelegate.hovered ? cfg_BlurRadius : 0
-            Behavior on radius {
-                NumberAnimation { duration: cfg_AnimationDuration }
-            }
-        }
-
         QtControls2.CheckBox {
-            visible: cfg_Slideshow
+            visible: isSlideShow
             anchors.right: parent.right
             anchors.top: parent.top
             checked: visible ? model.checked : false
@@ -139,15 +125,17 @@ KCM.GridDelegate {
 
     Behavior on opacity {
         OpacityAnimator {
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
 
     onClicked: {
-        if (!cfg_Slideshow) {
+        if (!isSlideShow) {
             cfg_Image = model.packageName || model.path;
-            wallpaper.configuration.PreviewImage = cfg_Image;
+            if (typeof wallpaper !== "undefined") {
+                wallpaper.configuration.PreviewImage = cfg_Image;
+            }
         }
         GridView.currentIndex = index;
     }

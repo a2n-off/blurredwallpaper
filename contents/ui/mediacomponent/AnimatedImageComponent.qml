@@ -4,12 +4,11 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Window 2.15
+import QtQuick
 
-import org.kde.plasma.wallpapers.image 2.0 as PlasmaWallpaper
+import org.kde.plasma.wallpapers.image as PlasmaWallpaper
 
-import org.kde.kwindowsystem 1.0
+import org.kde.kwindowsystem
 
 BaseMediaComponent {
     id: animatedImageComponent
@@ -19,13 +18,9 @@ BaseMediaComponent {
 
     blurSource: blurLoader.item
 
-    KWindowSystem {
-        id: kwindowsystem
-    }
-
     PlasmaWallpaper.MaximizedWindowMonitor {
         id: activeWindowMonitor
-        targetRect: animatedImageComponent.desktopRect
+        regionGeometry: animatedImageComponent.desktopRect
     }
 
     AnimatedImage {
@@ -40,7 +35,7 @@ BaseMediaComponent {
         // sourceSize is read-only
         // https://github.com/qt/qtdeclarative/blob/23b4ab24007f489ac7c2b9ceabe72fa625a51f3d/src/quick/items/qquickanimatedimage_p.h#L39
 
-        paused: activeWindowMonitor.count > 0 && !kwindowsystem.showingDesktop
+        paused: activeWindowMonitor.count > 0 && !KWindowSystem.showingDesktop
     }
 
     Loader {
