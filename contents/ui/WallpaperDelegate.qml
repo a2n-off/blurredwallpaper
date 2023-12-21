@@ -107,6 +107,20 @@ KCM.GridDelegate {
                 return QPixmapItem.PreserveAspectFit;
             }
         }
+
+        // Add the active blur for preview
+        FastBlur {
+            id: wallieActiveBlurPreview
+            anchors.fill: parent
+            source: walliePreview
+            visible: cfg_ActiveBlur
+            radius: wallpaperDelegate.hovered ? cfg_BlurRadius : 0
+            Behavior on radius {
+                NumberAnimation { duration: cfg_AnimationDuration }
+            }
+
+        }
+
         QtControls2.CheckBox {
             visible: isSlideShow
             anchors.right: parent.right
