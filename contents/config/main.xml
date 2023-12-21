@@ -6,11 +6,13 @@
   <kcfgfile name=""/>
 
   <group name="General">
+    <!--            -->
+    <!--  CUSTOM    -->
+    <!--            -->
     <entry name="Slideshow" type="bool">
       <label>Slideshow</label>
       <default>false</default>
     </entry>
-
     <entry name="ActiveBlur" type="bool">
       <label>Active Blur</label>
       <default>true</default>
@@ -24,12 +26,11 @@
       <default>400</default>
     </entry>
 
+    <!--                     -->
+    <!--  IMAGE & SLIDESHOW  -->
+    <!--                     -->
     <entry name="Blur" type="bool">
       <label>Blur background filling</label>
-      <default>false</default>
-    </entry>
-    <entry name="SlideshowFoldersFirst" type="bool">
-      <label>Display folders first when on slideshow</label>
       <default>false</default>
     </entry>
     <entry name="Color" type="Color">
@@ -40,13 +41,25 @@
       <label>Wallpaper image path or wallpaper name</label>
       <default></default>
     </entry>
+    <entry name="FillMode" type="int">
+      <label>Sizing, cropping and positioning of the wallpaper image</label>
+      <default>2</default>
+    </entry>
+
+    <!--            -->
+    <!--  IMAGE     -->
+    <!--            -->
     <entry name="PreviewImage" type="String">
       <label>Wallpaper preview image path</label>
       <default>null</default>
     </entry>
-    <entry name="FillMode" type="int">
-      <label>Sizing, cropping and positioning of the wallpaper image</label>
-      <default>2</default>
+
+    <!--            -->
+    <!--  SLIDESHOW -->
+    <!--            -->
+    <entry name="SlideshowFoldersFirst" type="bool">
+      <label>Processing folders first for the slideshow</label>
+      <default>false</default>
     </entry>
     <entry name="SlidePaths" type="StringList">
       <label>Paths used for the slideshow</label>
@@ -61,12 +74,9 @@
       <default></default>
     </entry>
     <entry name="SlideshowMode" type="int">
-        <label>Ordering mode for the slideshow</label>
-        <default>0</default>
+      <label>Ordering mode for the slideshow</label>
+      <default>0</default>
     </entry>
-    <entry name="SlideshowFoldersFirst" type="bool">
-        <label>Processing folders first for the slideshow</label>
-        <default>false</default>
-    </entry>
+
   </group>
 </kcfg>
