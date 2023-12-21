@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Wallpaper",
     "KPlugin": {
         "Authors": [
             {
@@ -21,9 +22,6 @@
             "image/tiff"
         ],
         "Name": "Active Blur",
-        "ServiceTypes": [
-            "Plasma/Wallpaper"
-        ],
         "Website": "https://github.com/bouteillerAlan/blurredwallpaper"
     },
     "Keywords": "blur;wallpaper;slideshow",
