@@ -14,11 +14,9 @@ import org.kde.plasma.plasmoid
 WallpaperItem {
     id: root
 
-    property var isSlideShow: cfg_Slideshow
-
     // used by WallpaperInterface for drag and drop
     onOpenUrlRequested: (url) => {
-        if (!isSlideShow) {
+        if (!root.configuration.Slideshow) {
             const result = imageWallpaper.addUsersWallpaper(url);
             if (result.length > 0) {
                 // Can be a file or a folder (KPackage)
@@ -35,13 +33,13 @@ WallpaperItem {
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_org.kde.image", "Open Wallpaper Image")
             icon.name: "document-open"
-            visible: isSlideShow
+            visible: root.configuration.Slideshow
             onTriggered: imageView.mediaProxy.openModelImage();
         },
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_org.kde.image", "Next Wallpaper Image")
             icon.name: "user-desktop"
-            visible: isSlideShow
+            visible: root.configuration.Slideshow
             onTriggered: imageWallpaper.nextSlide();
         }
     ]
@@ -60,7 +58,7 @@ WallpaperItem {
         configColor: root.configuration.Color
         blur: root.configuration.Blur
         source: {
-            if (isSlideShow) {
+            if (root.configuration.Slideshow) {
                 return imageWallpaper.image;
             }
             if (root.configuration.PreviewImage !== "null") {
@@ -78,7 +76,7 @@ WallpaperItem {
             configMap: root.configuration
             usedInConfig: false
             //the oneliner of difference between image and slideshow wallpapers
-            renderingMode: (!isSlideShow) ? Wallpaper.ImageBackend.SingleImage : Wallpaper.ImageBackend.SlideShow
+            renderingMode: (!root.configuration.Slideshow) ? Wallpaper.ImageBackend.SingleImage : Wallpaper.ImageBackend.SlideShow
             targetSize: imageView.sourceSize
             slidePaths: root.configuration.SlidePaths
             slideTimer: root.configuration.SlideInterval

@@ -60,12 +60,13 @@ ColumnLayout {
             thumbnailsLoader.item.screenSize = !!root.screen.geometry ? Qt.size(root.screen.geometry.width, root.screen.geometry.height):  Qt.size(root.screen.width, root.screen.height);
         }
     }
-    
+
     function saveConfig() {
-        if (!cfg_Slideshow) {
-            imageWallpaper.wallpaperModel.commitAddition();
-            imageWallpaper.wallpaperModel.commitDeletion();
-        }
+        // BUG
+        // if (!cfg_Slideshow) {
+        //     imageWallpaper.wallpaperModel.commitAddition();
+        //     imageWallpaper.wallpaperModel.commitDeletion();
+        // }
     }
 
     function openChooserDialog() {
@@ -113,7 +114,11 @@ ColumnLayout {
     }
 
     Kirigami.FormLayout {
-        twinFormLayouts: parentLayout
+        Component.onCompleted: function() {
+            if (typeof appearanceRoot !== "undefined") {
+                twinFormLayouts.push(appearanceRoot.parentLayout);
+            }
+        }
 
         QtControls2.CheckBox {
             id: activeSlideShowRadioButton
