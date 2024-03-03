@@ -21,9 +21,6 @@
             "image/tiff"
         ],
         "Name": "Active Blur",
-        "ServiceTypes": [
-            "Plasma/Wallpaper"
-        ],
         "Website": "https://github.com/bouteillerAlan/blurredwallpaper"
     },
     "Keywords": "blur;wallpaper;slideshow",
@@ -40,5 +37,7 @@
         "image/bmp",
         "image/webp",
         "image/tiff"
-    ]
+    ],
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPackageStructure": "Plasma/Wallpaper"
 }
