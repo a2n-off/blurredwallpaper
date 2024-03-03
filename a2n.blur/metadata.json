@@ -1,0 +1,43 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "a2n.dev@pm.me",
+                "Name": "Bouteiller <a2n> Alan"
+            }
+        ],
+        "Category": "",
+        "Description": "Wallpaper view for images with option for auto blur and slideshow",
+        "Icon": "preferences-desktop-wallpaper",
+        "Id": "a2n.blur",
+        "License": "GPLv3",
+        "MimeTypes": [
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/svg+xml-compressed",
+            "image/bmp",
+            "image/webp",
+            "image/tiff"
+        ],
+        "Name": "Active Blur",
+        "Website": "https://github.com/bouteillerAlan/blurredwallpaper"
+    },
+    "Keywords": "blur;wallpaper;slideshow",
+    "MimeType": "image/avif;image/gif;image/heif;image/jpeg;image/png;image/svg+xml;image/svg+xml-compressed;image/bmp;image/webp;image/tiff;",
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "X-Plasma-DropMimeTypes": [
+        "image/avif",
+        "image/gif",
+        "image/heif",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/svg+xml-compressed",
+        "image/bmp",
+        "image/webp",
+        "image/tiff"
+    ],
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPackageStructure": "Plasma/Wallpaper"
+}
