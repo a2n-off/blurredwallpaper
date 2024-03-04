@@ -97,7 +97,7 @@ WallpaperItem {
             configMap: root.configuration
             usedInConfig: false
             //the oneliner of difference between image and slideshow wallpapers
-            renderingMode: (!root.configuration.IsSlideshow) ? Wallpaper.ImageBackend.SingleImage : Wallpaper.ImageBackend.SlideShow
+            renderingMode: root.configuration.IsSlideshow ? Wallpaper.ImageBackend.SlideShow : Wallpaper.ImageBackend.SingleImage
             targetSize: imageView.sourceSize
             slidePaths: root.configuration.SlidePaths
             slideTimer: root.configuration.SlideInterval
