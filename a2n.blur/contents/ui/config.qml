@@ -68,7 +68,7 @@ ColumnLayout {
     }
     
     function saveConfig() {
-        if (!cfg_IsSlideshow) {
+        if (!cfg_IsSlideshow && imageWallpaper.wallpaperModel) {
             imageWallpaper.wallpaperModel.commitAddition();
             imageWallpaper.wallpaperModel.commitDeletion();
         }
@@ -82,7 +82,7 @@ ColumnLayout {
 
     PlasmaWallpaper.ImageBackend {
         id: imageWallpaper
-        renderingMode: !cfg_IsSlideshow ? PlasmaWallpaper.ImageBackend.SingleImage : PlasmaWallpaper.ImageBackend.SlideShow
+        renderingMode: cfg_IsSlideshow ? PlasmaWallpaper.ImageBackend.SlideShow : PlasmaWallpaper.ImageBackend.SingleImage
         targetSize: {
             // Lock screen configuration case
             return Qt.size(root.screenSize.width * root.screen.devicePixelRatio, root.screenSize.height * root.screen.devicePixelRatio)
@@ -118,9 +118,13 @@ ColumnLayout {
             imageWallpaper.slideshowFoldersFirst = cfg_SlideshowFoldersFirst
     }
 
-    //Rectangle { color: "orange"; x: formAlignment; width: formAlignment; height: 20 }
+    onCfg_IsSlideshowChanged: {
+         thumbnailsLoader.loadWallpaper()
+    }
 
     Kirigami.FormLayout {
+        id: formLayout
+        
         Component.onCompleted: function() {
             if (typeof appearanceRoot !== "undefined") {
                 twinFormLayouts.push(appearanceRoot.parentLayout);
@@ -144,6 +148,7 @@ ColumnLayout {
             text: activeSlideshowRadioButton.checked ? "Yes" : "No"
             onCheckedChanged: {
                 reloadMessage.visible = activeSlideshowRadioButton.checked
+                root.saveConfig()
             }
         }
 
@@ -194,16 +199,6 @@ ColumnLayout {
 
             valueFromText: function(text, locale) {
                 return parseInt(text, 10)
-            }
-        }
-    }
-
-    Kirigami.FormLayout {
-        id: formLayout
-        
-        Component.onCompleted: function() {
-            if (typeof appearanceRoot !== "undefined") {
-                twinFormLayouts.push(appearanceRoot.parentLayout);
             }
         }
         
@@ -312,31 +307,31 @@ ColumnLayout {
         Loader {
             id: thumbnailsLoader
             anchors.fill: parent
-        
+
             function loadWallpaper () {
                 let source = (!cfg_IsSlideshow) ? "ThumbnailsComponent.qml" :
                     ((cfg_IsSlideshow) ? "SlideshowComponent.qml" : "");
-                
+
                 let props = {screenSize: screenSize};
-                
+
                 if (cfg_IsSlideshow) {
                     props["configuration"] = wallpaperConfiguration;
                 }
                 thumbnailsLoader.setSource(source, props);
             }
         }
-        
+
         Connections {
             target: configDialog
             function onCurrentWallpaperChanged() {
                 thumbnailsLoader.loadWallpaper();
             }
         }
-        
+
         Component.onCompleted: () => {
             thumbnailsLoader.loadWallpaper();
         }
-        
+
     }
 
     Component.onDestruction: {
