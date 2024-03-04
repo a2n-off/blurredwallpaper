@@ -120,6 +120,11 @@ ColumnLayout {
 
     onCfg_IsSlideshowChanged: {
          thumbnailsLoader.loadWallpaper()
+
+         console.log("xxxxxxxxxxxxxxxxxxxxxxxx imageWallpaper.slidePaths", imageWallpaper.slidePaths)
+         console.log("xxxxxxxxxxxxxxxxxxxxxxxx imageWallpaper.image", imageWallpaper.image)
+         console.log("xxxxxxxxxxxxxxxxxxxxxxxx cfg_SlidePaths", cfg_SlidePaths)
+         console.log("xxxxxxxxxxxxxxxxxxxxxxxx cfg_Image", cfg_Image)
     }
 
     Kirigami.FormLayout {
@@ -135,9 +140,8 @@ ColumnLayout {
             id: reloadMessage
             Layout.fillWidth: true
             text: "If your wallpaper is not displayed, click on 'apply' then 'ok' then reopen the configuration. This bug is in the process of being fixed."
-            onLinkActivated: Qt.openUrlExternally(link)
             type: Kirigami.MessageType.Warning
-            visible: false
+            visible: true
         }
 
         // on/off button for slideshow option
@@ -147,8 +151,7 @@ ColumnLayout {
             Kirigami.FormData.label: "Slideshow:"
             text: activeSlideshowRadioButton.checked ? "Yes" : "No"
             onCheckedChanged: {
-                reloadMessage.visible = activeSlideshowRadioButton.checked
-                root.saveConfig()
+                //reloadMessage.visible = activeSlideshowRadioButton.checked
             }
         }
 

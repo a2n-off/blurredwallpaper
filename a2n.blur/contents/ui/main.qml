@@ -72,23 +72,23 @@ WallpaperItem {
         sourceSize: Qt.size(root.width * Screen.devicePixelRatio, root.height * Screen.devicePixelRatio)
         wallpaperInterface: root
 
-        // Add a FastBlur effect to the wallpaper
-        layer.enabled: root.configuration.ActiveBlur
-        layer.effect: FastBlur {
-            anchors.fill: parent
-            radius: windowModel.noWindowActive ? 0 : root.configuration.BlurRadius
-            source: Image {
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectCrop
-                source: root.source
-            }
-            // animate the blur apparition
-            Behavior on radius {
-                NumberAnimation {
-                    duration: root.configuration.AnimationDuration
-                }
-            }
-        }
+        // // Add a FastBlur effect to the wallpaper
+        // layer.enabled: root.configuration.ActiveBlur
+        // layer.effect: FastBlur {
+        //     anchors.fill: parent
+        //     radius: windowModel.noWindowActive ? 0 : root.configuration.BlurRadius
+        //     source: Image {
+        //         anchors.fill: parent
+        //         fillMode: Image.PreserveAspectCrop
+        //         source: root.source
+        //     }
+        //     // animate the blur apparition
+        //     Behavior on radius {
+        //         NumberAnimation {
+        //             duration: root.configuration.AnimationDuration
+        //         }
+        //     }
+        // }
 
         Wallpaper.ImageBackend {
             id: imageWallpaper
