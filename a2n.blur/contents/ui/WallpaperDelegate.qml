@@ -106,18 +106,6 @@ KCM.GridDelegate {
             }
         }
 
-        // Add the blur to the thumbnail for preview purpose
-        FastBlur {
-            id: wallieBlurPreview
-            anchors.fill: parent
-            source: walliePreview
-            visible: cfg_ActiveBlur
-            radius: wallpaperDelegate.hovered ? cfg_BlurRadius : 0
-            Behavior on radius {
-                NumberAnimation { duration: cfg_AnimationDuration }
-            }
-        }
-
         QtControls2.CheckBox {
             visible: cfg_IsSlideshow
             anchors.right: parent.right

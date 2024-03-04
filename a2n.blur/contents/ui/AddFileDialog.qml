@@ -12,7 +12,7 @@ Loader {
     id: dialogLoader
 
     asynchronous: true
-    sourceComponent: !root.configuration.IsSlideshow ? addFileDialog : addFolderDialog
+    sourceComponent: !cfg_IsSlideshow ? addFileDialog : addFolderDialog
 
     readonly property url defaultFolder: {
         let defaultPaths = StandardPaths.standardLocations(StandardPaths.PicturesLocation);

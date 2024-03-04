@@ -7,15 +7,19 @@
 */
 
 import QtQuick
+import QtQuick.Window
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.wallpapers.image as Wallpaper
 import org.kde.plasma.plasmoid
 
 // for FastBlur
 import Qt5Compat.GraphicalEffects
+import QtQml.Models
 
 WallpaperItem {
     id: root
+
+    property bool isAnyWindowActive: Application.active
 
     // used by WallpaperInterface for drag and drop
     onOpenUrlRequested: (url) => {
@@ -72,23 +76,23 @@ WallpaperItem {
         sourceSize: Qt.size(root.width * Screen.devicePixelRatio, root.height * Screen.devicePixelRatio)
         wallpaperInterface: root
 
-        // // Add a FastBlur effect to the wallpaper
-        // layer.enabled: root.configuration.ActiveBlur
-        // layer.effect: FastBlur {
-        //     anchors.fill: parent
-        //     radius: windowModel.noWindowActive ? 0 : root.configuration.BlurRadius
-        //     source: Image {
-        //         anchors.fill: parent
-        //         fillMode: Image.PreserveAspectCrop
-        //         source: root.source
-        //     }
-        //     // animate the blur apparition
-        //     Behavior on radius {
-        //         NumberAnimation {
-        //             duration: root.configuration.AnimationDuration
-        //         }
-        //     }
-        // }
+        // Add a FastBlur effect to the wallpaper
+        layer.enabled: root.configuration.ActiveBlur
+        layer.effect: FastBlur {
+            anchors.fill: parent
+            radius: isAnyWindowActive ? 0 : wallpaper.configuration.BlurRadius
+            source: Image {
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectCrop
+                source: imageView.source
+            }
+            // animate the blur apparition
+            Behavior on radius {
+                NumberAnimation {
+                    duration: root.configuration.AnimationDuration
+                }
+            }
+        }
 
         Wallpaper.ImageBackend {
             id: imageWallpaper
