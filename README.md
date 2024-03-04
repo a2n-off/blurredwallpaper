@@ -31,11 +31,14 @@ I have duplicated the default KDE `image` plugin so all the default effect and b
 
 ## Installation
 
-- Download via [the KDE store](https://www.pling.com/p/2017888/)
+- Download via [the KDE store](https://www.pling.com/p/2134907/)
 - Install it via the wallpaper plugin ("get new plugin" button into Desktop Folder Settings)
-- Download via [the AUR (for arch linux users)](https://aur.archlinux.org/packages/kdeplasma-blurredwallpaper-git)
+<!-- - Download via [the AUR (for arch linux users)](https://aur.archlinux.org/packages/kdeplasma-blurredwallpaper-git) -->
 - Download the last release and extract it and place the folder into `~/.local/share/plasma/wallpapers/` next you need to rename it into `a2n.blur`
 
+### KDE 5
+- Download via [the KDE store](https://www.pling.com/p/2017888/)
+- Download the V2.2.0 release and extract it and place the folder into `~/.local/share/plasma/wallpapers/` next you need to rename it into `a2n.blur`
 
 ## Configuration
 
@@ -71,8 +74,8 @@ Do not hesitate to open a pr or an issue. I reply when I can.
 
 - [Give me a tips](https://ko-fi.com/a2n00)
 - [Give a star on github](https://github.com/bouteillerAlan/blurredwallpaper)
-- [Add a rating and a comment on Pling](https://www.pling.com/p/2017888/)
-- [Become a fan on Pling](https://www.pling.com/p/2017888/)
+- [Add a rating and a comment on Pling](https://www.pling.com/p/2134907/)
+- [Become a fan on Pling](https://www.pling.com/p/2134907/)
 - Or just participate to the developement :D
 
 ### Thanks !
