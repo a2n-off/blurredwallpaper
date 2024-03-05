@@ -34,7 +34,7 @@ I have duplicated the default KDE `image` plugin so all the default effect and b
 - Download via [the KDE store](https://www.pling.com/p/2134907/)
 - Install it via the wallpaper plugin ("get new plugin" button into Desktop Folder Settings)
 - Download the last release and extract it and place the folder into `~/.local/share/plasma/wallpapers/` next you need to rename it into `a2n.blur`
-- **The AUR package is bound to the plasma realse on extra, so for the moment this option work only with palsma 5** Download via [the AUR (for arch linux users)](https://aur.archlinux.org/packages/kdeplasma-blurredwallpaper-git)
+- **The AUR package is bound to the plasma release on extra, so for the moment this option work only with palsma 5** Download via [the AUR (for arch linux users)](https://aur.archlinux.org/packages/kdeplasma-blurredwallpaper-git)
 
 ### KDE 5
 - Download via [the KDE store](https://www.pling.com/p/2017888/)
