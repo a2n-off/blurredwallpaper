@@ -1,5 +1,7 @@
 [//]: # (note for me - Linux/Unix Desktops > Desktop Extensions > KDE Plasma Extensions > Plasma Wallpaper Plugins)
 
+# **I'm working very hard to get it working on plasma 6, especially with the switch from x11 to wayland - thanks for your patience.**
+
 <p align="center">
   <a href="https://www.pling.com/p/2017888/">
     <img alt="ActiveBlur" src="assets/store-img.png" width="220"/>
