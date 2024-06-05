@@ -1,6 +1,6 @@
 [//]: # (note for me - Linux/Unix Desktops > Desktop Extensions > KDE Plasma Extensions > Plasma Wallpaper Plugins)
 
-# **I'm working very hard to get it working on plasma 6, especially with the switch from x11 to wayland - thanks for your patience.**
+## **This project is still maintained but I need help to solve the latest Plasma 6 bug. If you'd like to help, check out the issues.**
 
 <p align="center">
   <a href="https://www.pling.com/p/2017888/">
