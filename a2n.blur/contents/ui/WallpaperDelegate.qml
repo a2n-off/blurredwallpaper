@@ -104,6 +104,22 @@ KCM.GridDelegate {
                 }
                 return QPixmapItem.PreserveAspectFit;
             }
+            layer.enabled: cfg_ActiveBlur
+            layer.effect: FastBlur {
+                anchors.fill: parent
+                radius: wallpaperDelegate.hovered ? cfg_BlurRadius : 0
+                source: Image {
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectCrop
+                    source: walliePreview
+                }
+                // animate the blur apparition
+                Behavior on radius {
+                    NumberAnimation {
+                        duration: cfg_AnimationDuration
+                    }
+                }
+            }
         }
 
         QtControls2.CheckBox {

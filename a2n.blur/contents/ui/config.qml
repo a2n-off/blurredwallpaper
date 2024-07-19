@@ -51,9 +51,7 @@ ColumnLayout {
     property alias cfg_ActiveBlur: activeBlurRadioButton.checked
     property int cfg_AnimationDuration: 400
     property int cfg_BlurRadius: 40
-
-    // custom property for chosing slideshow or image
-    property alias cfg_IsSlideshow: activeSlideshowRadioButton.checked
+    property var cfg_IsSlideshow: false
 
     signal configurationChanged()
     /**
@@ -68,7 +66,7 @@ ColumnLayout {
     }
     
     function saveConfig() {
-        if (!cfg_IsSlideshow && imageWallpaper.wallpaperModel) {
+        if (!cfg_IsSlideshow) {
             imageWallpaper.wallpaperModel.commitAddition();
             imageWallpaper.wallpaperModel.commitDeletion();
         }
@@ -82,7 +80,7 @@ ColumnLayout {
 
     PlasmaWallpaper.ImageBackend {
         id: imageWallpaper
-        renderingMode: cfg_IsSlideshow ? PlasmaWallpaper.ImageBackend.SlideShow : PlasmaWallpaper.ImageBackend.SingleImage
+        renderingMode: (!cfg_IsSlideshow) ? PlasmaWallpaper.ImageBackend.SingleImage : PlasmaWallpaper.ImageBackend.SlideShow
         targetSize: {
             // Lock screen configuration case
             return Qt.size(root.screenSize.width * root.screen.devicePixelRatio, root.screenSize.height * root.screen.devicePixelRatio)
@@ -118,93 +116,19 @@ ColumnLayout {
             imageWallpaper.slideshowFoldersFirst = cfg_SlideshowFoldersFirst
     }
 
-    onCfg_IsSlideshowChanged: {
-         thumbnailsLoader.loadWallpaper()
-
-         console.log("xxxxxxxxxxxxxxxxxxxxxxxx imageWallpaper.slidePaths", imageWallpaper.slidePaths)
-         console.log("xxxxxxxxxxxxxxxxxxxxxxxx imageWallpaper.image", imageWallpaper.image)
-         console.log("xxxxxxxxxxxxxxxxxxxxxxxx cfg_SlidePaths", cfg_SlidePaths)
-         console.log("xxxxxxxxxxxxxxxxxxxxxxxx cfg_Image", cfg_Image)
-    }
+    spacing: 0
 
     Kirigami.FormLayout {
         id: formLayout
-        
+
+        Layout.bottomMargin: !cfg_IsSlideshow ? Kirigami.Units.largeSpacing : 0
+
         Component.onCompleted: function() {
             if (typeof appearanceRoot !== "undefined") {
                 twinFormLayouts.push(appearanceRoot.parentLayout);
             }
         }
 
-        Kirigami.InlineMessage {
-            id: reloadMessage
-            Layout.fillWidth: true
-            text: "If your wallpaper is not displayed, click on 'apply' then 'ok' then reopen the configuration. This bug is in the process of being fixed."
-            type: Kirigami.MessageType.Warning
-            visible: true
-        }
-
-        // on/off button for slideshow option
-        QtControls2.CheckBox {
-            id: activeSlideshowRadioButton
-            visible: true
-            Kirigami.FormData.label: "Slideshow:"
-            text: activeSlideshowRadioButton.checked ? "Yes" : "No"
-            onCheckedChanged: {
-                //reloadMessage.visible = activeSlideshowRadioButton.checked
-            }
-        }
-
-        // on/off button for active blur
-        QtControls2.CheckBox {
-            id: activeBlurRadioButton
-            visible: true
-            Kirigami.FormData.label: "Active Blur:"
-            text: activeBlurRadioButton.checked ? "On" : "Off"
-        }
-
-        // slider for the active blur radius
-        QtControls2.SpinBox {
-            Kirigami.FormData.label: "Blur Radius:"
-            id: blurRadiusSpinBox
-            value: cfg_BlurRadius
-            onValueChanged: cfg_BlurRadius = value
-            stepSize: 1
-            from: 1
-            to: 9999
-            editable: true
-            enabled: activeBlurRadioButton.checked
-        }
-
-        Kirigami.InlineMessage {
-            id: blurRadiusWarning
-            Layout.fillWidth: true
-            text: "The value ranges from 0 to 9999. Visual quality of the blur is reduced when radius exceeds value 64 due to QT. Some hight value may blackout your wallpaper. If this is the case, reduce the value untill normal behavior is restored."
-            type: Kirigami.MessageType.Information
-            visible: blurRadiusSpinBox.value > 64
-        }
-
-        // slider for the active blur animation delay
-        QtControls2.SpinBox {
-            Kirigami.FormData.label: "Animation Delay:"
-            id: animationDurationSpinBox
-            value: cfg_AnimationDuration
-            onValueChanged: cfg_AnimationDuration = value
-            from: 0
-            to: 60000 // 1 minute in ms
-            stepSize: 50
-            editable: true
-            enabled: activeBlurRadioButton.checked
-
-            textFromValue: function(value, locale) {
-                return i18n("%1ms", value)
-            }
-
-            valueFromText: function(text, locale) {
-                return parseInt(text, 10)
-            }
-        }
-        
         QtControls2.ComboBox {
             id: resizeComboBox
             Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.image", "Positioning:")
@@ -282,6 +206,57 @@ ColumnLayout {
                 }
             }
         }
+
+        // on/off button for active blur
+        QtControls2.CheckBox {
+            id: activeBlurRadioButton
+            visible: true
+            Kirigami.FormData.label: "Active Blur:"
+            text: activeBlurRadioButton.checked ? "On" : "Off"
+        }
+
+        // slider for the active blur radius
+        QtControls2.SpinBox {
+            Kirigami.FormData.label: "Blur Radius:"
+            id: blurRadiusSpinBox
+            value: cfg_BlurRadius
+            onValueChanged: cfg_BlurRadius = value
+            stepSize: 1
+            from: 1
+            to: 9999
+            editable: true
+            enabled: activeBlurRadioButton.checked
+        }
+
+        Kirigami.InlineMessage {
+            id: blurRadiusWarning
+            Layout.fillWidth: true
+            text: "The value ranges from 0 to 9999. Visual quality of the blur is reduced when radius exceeds value 64 due to QT. Some hight value may blackout your wallpaper. If this is the case, reduce the value untill normal behavior is restored."
+            type: Kirigami.MessageType.Information
+            visible: blurRadiusSpinBox.value > 64
+        }
+
+        // slider for the active blur animation delay
+        QtControls2.SpinBox {
+            Kirigami.FormData.label: "Animation Delay:"
+            id: animationDurationSpinBox
+            value: cfg_AnimationDuration
+            onValueChanged: cfg_AnimationDuration = value
+            from: 0
+            to: 60000 // 1 minute in ms
+            stepSize: 50
+            editable: true
+            enabled: activeBlurRadioButton.checked
+
+            textFromValue: function(value, locale) {
+                return i18n("%1ms", value)
+            }
+
+            valueFromText: function(text, locale) {
+                return parseInt(text, 10)
+            }
+        }
+
     }
 
     DropArea {
@@ -310,31 +285,31 @@ ColumnLayout {
         Loader {
             id: thumbnailsLoader
             anchors.fill: parent
-
+        
             function loadWallpaper () {
                 let source = (!cfg_IsSlideshow) ? "ThumbnailsComponent.qml" :
                     ((cfg_IsSlideshow) ? "SlideshowComponent.qml" : "");
-
+                
                 let props = {screenSize: screenSize};
-
+                
                 if (cfg_IsSlideshow) {
                     props["configuration"] = wallpaperConfiguration;
                 }
                 thumbnailsLoader.setSource(source, props);
             }
         }
-
+        
         Connections {
             target: configDialog
             function onCurrentWallpaperChanged() {
                 thumbnailsLoader.loadWallpaper();
             }
         }
-
+        
         Component.onCompleted: () => {
             thumbnailsLoader.loadWallpaper();
         }
-
+        
     }
 
     Component.onDestruction: {

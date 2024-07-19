@@ -7,7 +7,6 @@
 */
 
 import QtQuick
-import QtQuick.Window
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.wallpapers.image as Wallpaper
 import org.kde.plasma.plasmoid
@@ -51,6 +50,14 @@ WallpaperItem {
         }
     ]
 
+    Connections {
+        enabled: root.configuration.IsSlideshow
+        target: Qt.application
+        function onAboutToQuit() {
+            root.configuration.writeConfig(); // Save the last position
+        }
+    }
+
     Component.onCompleted: {
         // In case plasmashell crashes when the config dialog is opened
         root.configuration.PreviewImage = "null";
@@ -80,7 +87,7 @@ WallpaperItem {
         layer.enabled: root.configuration.ActiveBlur
         layer.effect: FastBlur {
             anchors.fill: parent
-            radius: isAnyWindowActive ? 0 : wallpaper.configuration.BlurRadius
+            radius: isAnyWindowActive ? 0 : root.configuration.BlurRadius
             source: Image {
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectCrop
@@ -101,7 +108,7 @@ WallpaperItem {
             configMap: root.configuration
             usedInConfig: false
             //the oneliner of difference between image and slideshow wallpapers
-            renderingMode: root.configuration.IsSlideshow ? Wallpaper.ImageBackend.SlideShow : Wallpaper.ImageBackend.SingleImage
+            renderingMode: (!root.configuration.IsSlideshow) ? Wallpaper.ImageBackend.SingleImage : Wallpaper.ImageBackend.SlideShow
             targetSize: imageView.sourceSize
             slidePaths: root.configuration.SlidePaths
             slideTimer: root.configuration.SlideInterval
@@ -113,6 +120,12 @@ WallpaperItem {
             function writeImageConfig(newImage: string) {
                 configMap.Image = newImage;
             }
+        }
+    }
+
+    Component.onDestruction: {
+        if (root.configuration.IsSlideshow) {
+            root.configuration.writeConfig(); // Save the last position
         }
     }
 }
