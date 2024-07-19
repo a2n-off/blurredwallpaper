@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Wallpaper",
     "KPlugin": {
         "Authors": [
             {
@@ -7,10 +8,10 @@
             }
         ],
         "Category": "",
-        "Description": "Wallpaper view for images with option for auto blur and slideshow",
+        "Description": "Wallpaper view for images with active blur",
         "Icon": "preferences-desktop-wallpaper",
-        "Id": "a2n.blur",
-        "License": "GPLv3",
+        "Id": "a2n.blur.new",
+        "License": "GPLv2+",
         "MimeTypes": [
             "image/jpeg",
             "image/png",
@@ -20,7 +21,7 @@
             "image/webp",
             "image/tiff"
         ],
-        "Name": "Active Blur",
+        "Name": "NEW Active blur",
         "Website": "https://github.com/bouteillerAlan/blurredwallpaper"
     },
     "Keywords": "blur;wallpaper;slideshow",
@@ -37,7 +38,5 @@
         "image/bmp",
         "image/webp",
         "image/tiff"
-    ],
-    "X-Plasma-API-Minimum-Version": "6.0",
-    "KPackageStructure": "Plasma/Wallpaper"
+    ]
 }
