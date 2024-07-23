@@ -58,6 +58,8 @@ ColumnLayout {
      * Emitted when the user finishes adding images using the file dialog.
      */
     signal wallpaperBrowseCompleted();
+
+    signal slideshowStateChanged(bool isChecked);
     
     onScreenChanged: function() {
         if (thumbnailsLoader.item) {
@@ -215,6 +217,9 @@ ColumnLayout {
             visible: true
             Kirigami.FormData.label: "Slideshow:"
             text: activeSlideshowRadioButton.checked ? "On" : "Off"
+            onCheckedChanged: {
+                root.slideshowStateChanged(activeSlideshowRadioButton.checked);
+            }
         }
 
         // on/off button for active blur
@@ -295,17 +300,21 @@ ColumnLayout {
         Loader {
             id: thumbnailsLoader
             anchors.fill: parent
-        
+
             function loadWallpaper () {
                 let source = (!cfg_IsSlideshow) ? "ThumbnailsComponent.qml" :
                     ((cfg_IsSlideshow) ? "SlideshowComponent.qml" : "");
-                
+
                 let props = {screenSize: screenSize};
-                
+
                 if (cfg_IsSlideshow) {
                     props["configuration"] = wallpaperConfiguration;
                 }
+
                 thumbnailsLoader.setSource(source, props);
+
+                console.log("--------",source)
+                console.log("--------",JSON.stringify(props))
             }
         }
         
@@ -313,6 +322,18 @@ ColumnLayout {
             target: configDialog
             function onCurrentWallpaperChanged() {
                 thumbnailsLoader.loadWallpaper();
+            }
+        }
+
+        Connections {
+            target: root
+            function onSlideshowStateChanged(isChecked) {
+                console.log("IsSlideshow state changed:", isChecked);
+                thumbnailsLoader.loadWallpaper();
+                // from ConfigurationContainmentAppearance.qml
+                var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
+                appearanceRoot.containmentPlugin = model.pluginName
+                appearanceRoot.configurationChanged()
             }
         }
         
