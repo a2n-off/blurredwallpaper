@@ -219,7 +219,16 @@ ColumnLayout {
             text: activeSlideshowRadioButton.checked ? "On" : "Off"
             onCheckedChanged: {
                 root.slideshowStateChanged(activeSlideshowRadioButton.checked);
+                alertIsSlideshowChanged.visible = true;
             }
+        }
+
+        Kirigami.InlineMessage {
+            id: alertIsSlideshowChanged
+            Layout.fillWidth: true
+            text: "Please hit Apply and reopen this window before doing anything else. <br> <a href=\"https://github.com/bouteillerAlan/blurredwallpaper/issues/25\">If you want to help with this issue, click here!<a/>"
+            onLinkActivated: Qt.openUrlExternally(link)
+            type: Kirigami.MessageType.Error
         }
 
         // on/off button for active blur
@@ -312,9 +321,6 @@ ColumnLayout {
                 }
 
                 thumbnailsLoader.setSource(source, props);
-
-                console.log("--------",source)
-                console.log("--------",JSON.stringify(props))
             }
         }
         
@@ -329,11 +335,8 @@ ColumnLayout {
             target: root
             function onSlideshowStateChanged(isChecked) {
                 console.log("IsSlideshow state changed:", isChecked);
+                // reload the UI, but not the img list
                 thumbnailsLoader.loadWallpaper();
-                // from ConfigurationContainmentAppearance.qml
-                var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
-                appearanceRoot.containmentPlugin = model.pluginName
-                appearanceRoot.configurationChanged()
             }
         }
         
