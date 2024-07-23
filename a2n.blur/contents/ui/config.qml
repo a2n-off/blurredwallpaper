@@ -51,7 +51,7 @@ ColumnLayout {
     property alias cfg_ActiveBlur: activeBlurRadioButton.checked
     property int cfg_AnimationDuration: 400
     property int cfg_BlurRadius: 40
-    property var cfg_IsSlideshow: false
+    property alias cfg_IsSlideshow: activeSlideshowRadioButton.checked
 
     signal configurationChanged()
     /**
@@ -66,7 +66,9 @@ ColumnLayout {
     }
     
     function saveConfig() {
-        if (!cfg_IsSlideshow) {
+        // added imageWallpaper.wallpaperModel to avoid a undefined
+        // when the user change between slideshow and image
+        if (!cfg_IsSlideshow && imageWallpaper.wallpaperModel) {
             imageWallpaper.wallpaperModel.commitAddition();
             imageWallpaper.wallpaperModel.commitDeletion();
         }
@@ -205,6 +207,14 @@ ColumnLayout {
                     highlight: cfg_Color != cfg_ColorDefault
                 }
             }
+        }
+
+        // on/off button for slideshow
+        QtControls2.CheckBox {
+            id: activeSlideshowRadioButton
+            visible: true
+            Kirigami.FormData.label: "Slideshow:"
+            text: activeSlideshowRadioButton.checked ? "On" : "Off"
         }
 
         // on/off button for active blur
