@@ -62,6 +62,7 @@ WallpaperItem {
         // In case plasmashell crashes when the config dialog is opened
         root.configuration.PreviewImage = "null";
         root.loading = true; // delays ksplash until the wallpaper has been loaded
+        console.log("///////////////", JSON.stringify(root.configuration))
     }
 
     ImageStackView {
