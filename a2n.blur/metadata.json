@@ -8,9 +8,9 @@
             }
         ],
         "Category": "",
-        "Description": "Wallpaper view for images with active blur",
+        "Description": "Wallpaper view for images & slideshow with active blur",
         "Icon": "preferences-desktop-wallpaper",
-        "Id": "a2n.blur.new",
+        "Id": "a2n.blur",
         "License": "GPLv2+",
         "MimeTypes": [
             "image/jpeg",
@@ -21,7 +21,7 @@
             "image/webp",
             "image/tiff"
         ],
-        "Name": "NEW Active blur",
+        "Name": "Active blur",
         "Website": "https://github.com/bouteillerAlan/blurredwallpaper"
     },
     "Keywords": "blur;wallpaper;slideshow",
