@@ -10,7 +10,8 @@ import QtQuick
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.wallpapers.image as Wallpaper
 import org.kde.plasma.plasmoid
-
+import org.kde.taskmanager as TaskManager
+import org.kde.activities as Activities
 // for FastBlur
 import Qt5Compat.GraphicalEffects
 import QtQml.Models
@@ -18,7 +19,21 @@ import QtQml.Models
 WallpaperItem {
     id: root
 
-    property bool isAnyWindowActive: Application.active
+    //property bool isAnyWindowActive: Application.active
+    readonly property bool isAnyWindowActive: windowInfoLoader.item && !windowInfoLoader.item.existsWindowActive
+    property Item activeTaskItem: windowInfoLoader.item.activeTaskItem
+
+    TaskManager.ActivityInfo { id: activityInfo }
+    TaskManager.VirtualDesktopInfo { id: virtualDesktopInfo }
+
+    Loader {
+        id: windowInfoLoader
+        sourceComponent: tasksModel
+        Component {
+            id: tasksModel
+            TasksModel {}
+        }
+    }
 
     // used by WallpaperInterface for drag and drop
     onOpenUrlRequested: (url) => {
