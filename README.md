@@ -23,7 +23,7 @@ Blur the wallpaper if a windows is active.
     - add color and blur option in function of the positioning
 - give you the ability to deactivate the effect
 - give you the ability to change the blur radius and the animation delay
-- `new` the slideshow wallpaper type is available too 
+- `new` the slideshow wallpaper type is available too
 
 ### history
 
@@ -67,8 +67,7 @@ See the following file :
 
 ## Roadmap
 
-- bug : the first time a user selects slideshow the wallpapers are not displayed
-- related : make a kwin script to affect all types of wallpapers ([see that repo](https://github.com/bouteillerAlan/activeblur))
+- bug : see issue #25 for the desync when user switch between img and slideshow
 
 ## Want to participate? Have a bug or a request feature?
 
